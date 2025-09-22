@@ -15,4 +15,8 @@ public class BookController {
     BookController(BookService service) {
         this.service = service;
     }
+
+    public List<Book> getBooks() {
+        return service.getAllBooks();
+    }
 }
