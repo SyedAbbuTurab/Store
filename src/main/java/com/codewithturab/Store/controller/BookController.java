@@ -29,7 +29,9 @@ public class BookController {
     }
 
     @PostMapping
-    public Book createBook(@RequestBody Book book) {
-        return service.createBook(book);
+    public BookResponse createBook(@RequestBody @Valid BookRequest request) {
+        Book book = new Book(request.getTitle(), request.getAuthor());
+        Book saved = service.createBook((book));
+        return new BookResponse(saved.getId(), saved.getTitle(), saved.getAuthor());
     }
 }
