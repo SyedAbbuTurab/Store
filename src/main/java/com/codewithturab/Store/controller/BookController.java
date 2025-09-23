@@ -8,7 +8,7 @@ import com.codewithturab.Store.dto.BookResponse;
 import com.codewithturab.Store.dto.BookRequest;
 
 import java.util.List;
-import java.util.Stream.Collectors;
+import java.util.stream.Collectors;
 // Till here
 
 @RestController
@@ -22,8 +22,10 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getBooks() {
-        return service.getAllBooks();
+    public List<BookResponse> getBooks() {
+        return service.getAllBooks().stream()
+                .map(book -> new BookResponse(book.getId(),  book.getTitle(), book.getAuthor()))
+                .collect(Collectors.toList());
     }
 
     @PostMapping
