@@ -6,7 +6,7 @@ public class BookResponse {
     private  String title;
     private String author;
 
-    BookResponse(String id, String title, String author) {
+    public BookResponse(String id, String title, String author) {
         this.id = id;
         this.title= title;
         this.author= author;
