@@ -28,6 +28,7 @@ public class BookController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("{/id}")
     public BookResponse getBookById(@PathVariable String id) {
         Book book = service.getBookById(id)
         .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
