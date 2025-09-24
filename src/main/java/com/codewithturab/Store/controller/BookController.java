@@ -28,6 +28,12 @@ public class BookController {
                 .collect(Collectors.toList());
     }
 
+    public BookResponse getBookById(@PathVariable String id) {
+        Book book = service.getBookById(id)
+        .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+        return new BookResponse(book.getId(), book.getTitle(), book.getAuthor());
+    }
+
     @PostMapping
     public BookResponse createBook(@RequestBody @Valid BookRequest request) {
         Book book = new Book(request.getTitle(), request.getAuthor());
