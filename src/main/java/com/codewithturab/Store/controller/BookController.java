@@ -42,6 +42,12 @@ public class BookController {
         return new BookResponse(saved.getId(), saved.getTitle(), saved.getAuthor());
     }
 
+    public  BookResponse updateBook(@PathVariable String id, @Valid @RequestBody BookRequest request) {
+        Book updatedBook = new Book(request.getTitle(), request.getAuthor());
+        Book saved = service.updateBook(id, updatedBook);
+        return  new BookResponse(saved.getId(), saved.getTitle(), saved.getAuthor());
+    }
+
     @DeleteMapping("{/id}")
     public void deleteBook(@PathVariable String id) {
         service.deleteBook(id);
