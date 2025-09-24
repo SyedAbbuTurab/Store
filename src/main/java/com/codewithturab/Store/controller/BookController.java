@@ -42,6 +42,7 @@ public class BookController {
         return new BookResponse(saved.getId(), saved.getTitle(), saved.getAuthor());
     }
 
+    @PutMapping("{/id}")
     public  BookResponse updateBook(@PathVariable String id, @Valid @RequestBody BookRequest request) {
         Book updatedBook = new Book(request.getTitle(), request.getAuthor());
         Book saved = service.updateBook(id, updatedBook);
