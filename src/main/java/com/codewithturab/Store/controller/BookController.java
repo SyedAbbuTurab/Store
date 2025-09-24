@@ -41,4 +41,9 @@ public class BookController {
         Book saved = service.createBook((book));
         return new BookResponse(saved.getId(), saved.getTitle(), saved.getAuthor());
     }
+
+    @DeleteMapping("{/id}")
+    public void deleteBook(@PathVariable String id) {
+        service.deleteBook(id);
+    }
 }
