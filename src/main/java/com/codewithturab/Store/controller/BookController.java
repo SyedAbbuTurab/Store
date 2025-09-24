@@ -28,10 +28,29 @@ public class BookController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("{/id}")
+    public BookResponse getBookById(@PathVariable String id) {
+        Book book = service.getBookById(id)
+        .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+        return new BookResponse(book.getId(), book.getTitle(), book.getAuthor());
+    }
+
     @PostMapping
     public BookResponse createBook(@RequestBody @Valid BookRequest request) {
         Book book = new Book(request.getTitle(), request.getAuthor());
         Book saved = service.createBook((book));
         return new BookResponse(saved.getId(), saved.getTitle(), saved.getAuthor());
+    }
+
+    @PutMapping("{/id}")
+    public  BookResponse updateBook(@PathVariable String id, @Valid @RequestBody BookRequest request) {
+        Book updatedBook = new Book(request.getTitle(), request.getAuthor());
+        Book saved = service.updateBook(id, updatedBook);
+        return  new BookResponse(saved.getId(), saved.getTitle(), saved.getAuthor());
+    }
+
+    @DeleteMapping("{/id}")
+    public void deleteBook(@PathVariable String id) {
+        service.deleteBook(id);
     }
 }
