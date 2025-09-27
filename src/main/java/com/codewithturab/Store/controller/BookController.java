@@ -9,11 +9,14 @@ import com.codewithturab.Store.dto.BookRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
-// Till here
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
+
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+
 
     private final BookService service;
 
@@ -23,9 +26,12 @@ public class BookController {
 
     @GetMapping
     public List<BookResponse> getBooks() {
-        return service.getAllBooks().stream()
-                .map(book -> new BookResponse(book.getId(),  book.getTitle(), book.getAuthor()))
-                .collect(Collectors.toList());
+        logger.info("📚 Fetching all books");
+        List<BookResponse> books = service.getAllBooks().stream()
+                .map(book -> new BookResponse(book.getId(), book.getTitle(), book.getAuthor()))
+                .toList();
+        logger.debug("Books retrieved: {}", books.size());
+        return books;
     }
 
     @GetMapping("/{id}")
