@@ -23,7 +23,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' // MongoDB integration
     implementation 'org.springframework.boot:spring-boot-starter-validation' // For input validation
 
-    implementation 'org.springframework.boot:spring-boot-starter-security'   // Spring Security
+//    implementation 'org.springframework.boot:spring-boot-starter-security'   // Spring Security
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'                        // JWT API
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'                          // JWT implementation
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'                       // JSON parsing
