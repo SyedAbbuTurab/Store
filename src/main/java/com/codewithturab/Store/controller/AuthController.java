@@ -24,9 +24,18 @@ public class AuthController {
 
     @PostMapping("/register")
     public User register(@RequestBody User user) {
-        logger.info("📥 Received registration request: username={}, role={}, raw password={}",
-                user.getUsername(), user.getRole(), user.getPassword());
-        return userRepo.save(user);
+        logger.info("📥 Register API called");  // INFO log
+        logger.debug("Incoming user object: {}", user); // DEBUG log
+
+        try {
+            User saved = userRepo.save(user);
+            logger.info("✅ User registered successfully: {}", saved.getUsername());
+            return saved;
+        } catch (Exception e) {
+            logger.error("❌ Failed to register user: {}", e.getMessage(), e);
+            throw e;
+        }
     }
+
 
 }
