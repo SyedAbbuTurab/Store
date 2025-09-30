@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-
+@Component
 public class JwtUtil {
 
     @Value("${jwt.secret}")
-    private static String secretKey;
+    private String secretKey;
 
-    private static  final long EXPIRATION = 1000 * 60 * 60;
+    private final long EXPIRATION = 1000 * 60 * 60;
 
-    public static  String generateToken(String username) {
+    public  String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
@@ -25,15 +25,15 @@ public class JwtUtil {
                 .compact();
     }
 
-    public static String extractUsername(String token) {
+    public String extractUsername(String token) {
         return getClaims(token).getSubject();
     }
 
-    public static Boolean isTokenValid(String token) {
+    public Boolean isTokenValid(String token) {
         return !getClaims(token).getExpiration().before(new Date());
     }
 
-    private static Claims getClaims(String token) {
+    private Claims getClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey.getBytes())
                 .parseClaimsJws(token)

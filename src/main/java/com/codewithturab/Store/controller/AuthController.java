@@ -16,9 +16,11 @@ public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     private final UserRepository userRepo;
+    private final JwtUtil jwtUtil;
 
-    public AuthController(UserRepository userRepo) {
+    public AuthController(UserRepository userRepo, JwtUtil jwtUtil) {
         this.userRepo = userRepo;
+        this.jwtUtil = jwtUtil;
     }
 
 
@@ -51,7 +53,7 @@ public class AuthController {
 
         logger.info("Login attempt for user: {}", loginRequest.getUsername() + "Successful & token generated");
 
-        String token = JwtUtil.generateToken(user.getUsername());
+        String token = jwtUtil.generateToken(user.getUsername());
         return  Map.of( "token", token);
     }
 
