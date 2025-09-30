@@ -22,7 +22,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'        // Web APIs (REST)
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' // MongoDB integration
     implementation 'org.springframework.boot:spring-boot-starter-validation' // For input validation
-    implementation 'org.springframework.boot:spring-boot-starter-security'
 
 //    implementation 'org.springframework.boot:spring-boot-starter-security'   // Spring Security
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'                        // JWT API
