@@ -42,14 +42,14 @@ public class AuthController {
 
         logger.info("Login attempt for user: {}", loginRequest.getUsername());
 
-        logger.info("Here", userRepo.findByUsername(loginRequest.getUsername()));
-
         User user = userRepo.findByUsername(loginRequest.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if(!user.getPassword().equals(loginRequest.getPassword())){
             throw  new RuntimeException("Invalid credentials");
         }
+
+        logger.info("Login attempt for user: {}", loginRequest.getUsername() + "Successful & token generated");
 
         String token = JwtUtil.generateToken(user.getUsername());
         return  Map.of( "token", token);
