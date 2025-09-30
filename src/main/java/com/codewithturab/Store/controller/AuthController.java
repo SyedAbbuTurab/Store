@@ -37,5 +37,23 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/login")
+    public Map<String, String> login(@RequestBody User loginRequest) {
+
+        logger.info("Login attempt for user: {}", loginRequest.getUsername());
+
+        logger.info("Here", userRepo.findByUsername(loginRequest.getUsername()));
+
+        User user = userRepo.findByUsername(loginRequest.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if(!user.getPassword().equals(loginRequest.getPassword())){
+            throw  new RuntimeException("Invalid credentials");
+        }
+
+        String token = JwtUtil.generateToken(user.getUsername());
+        return  Map.of( "token", token);
+    }
+
 
 }

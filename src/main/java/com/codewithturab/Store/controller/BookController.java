@@ -4,6 +4,7 @@ import com.codewithturab.Store.model.Book;
 import com.codewithturab.Store.service.BookService;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
+import com.codewithturab.Store.security.JwtUtil;
 import com.codewithturab.Store.dto.BookResponse;
 import com.codewithturab.Store.dto.BookRequest;
 
@@ -25,8 +26,13 @@ public class BookController {
     }
 
     @GetMapping
-    public List<BookResponse> getBooks() {
+    public List<BookResponse> getBooks(@RequestHeader("Authorization") String authHeader) {
         logger.info("📚 Fetching all books");
+        String token = authHeader.replace("Bearer ", "");
+
+        if(!JwtUtil.isTokenValid(token)) {
+            throw new RuntimeException("Invalid or expired token");
+        }
         List<BookResponse> books = service.getAllBooks().stream()
                 .map(book -> new BookResponse(book.getId(), book.getTitle(), book.getAuthor()))
                 .toList();
