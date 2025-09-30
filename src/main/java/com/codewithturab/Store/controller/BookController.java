@@ -20,9 +20,11 @@ public class BookController {
 
 
     private final BookService service;
+    private final JwtUtil jwtUtil;
 
-    BookController(BookService service) {
+    BookController(BookService service, JwtUtil jwtUtil) {
         this.service = service;
+        this.jwtUtil = jwtUtil;
     }
 
     @GetMapping
@@ -30,7 +32,7 @@ public class BookController {
         logger.info("📚 Fetching all books");
         String token = authHeader.replace("Bearer ", "");
 
-        if(!JwtUtil.isTokenValid(token)) {
+        if(!jwtUtil.isTokenValid(token)) {
             throw new RuntimeException("Invalid or expired token");
         }
         List<BookResponse> books = service.getAllBooks().stream()
