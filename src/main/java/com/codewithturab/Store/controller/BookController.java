@@ -67,4 +67,20 @@ public class BookController {
     public void deleteBook(@PathVariable String id) {
         service.deleteBook(id);
     }
+
+    @GetMapping("/admin")
+    public String adminOnly(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        if(!jwtUtil.isTokenValid(token)) {
+            throw  new RuntimeException("Invalid or Expired toke!");
+        }
+
+        String role = jwtUtil.extractRole(token);
+
+        if(!"ADMIN".equals(role)) {
+            throw new RuntimeException("Access denied. Admins only.");
+        }
+
+        return "Welcome Admin";
+    }
 }
