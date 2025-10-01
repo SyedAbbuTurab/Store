@@ -53,7 +53,7 @@ public class AuthController {
 
         logger.info("Login attempt for user: {}", loginRequest.getUsername() + "Successful & token generated");
 
-        String token = jwtUtil.generateToken(user.getUsername());
+        String token = jwtUtil.generateToken(user.getUsername(), user.getRole());
         return  Map.of( "token", token);
     }
 
