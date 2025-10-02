@@ -33,12 +33,8 @@ public class BookController {
     @GetMapping
     public List<BookResponse> getBooks(@RequestHeader("Authorization") String authHeader) {
         logger.info("📚 Fetching all books");
-//        String token = authHeader.replace("Bearer ", "");
         String token = jwtAuthHelper.extractToken(authHeader);
-
-//        if(!jwtUtil.isTokenValid(token)) {
-//            throw new RuntimeException("Invalid or expired token");
-//        }
+        jwtAuthHelper.validateAndExtractUsername(token);  // just validates
 
         List<BookResponse> books = service.getAllBooks().stream()
                 .map(book -> new BookResponse(book.getId(), book.getTitle(), book.getAuthor()))
