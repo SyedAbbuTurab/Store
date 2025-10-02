@@ -35,4 +35,10 @@ public class JwtAuthHelper {
         return jwtUtil.extractUsername(token);
     }
 
+    /**
+     * Validates the JWT token and returns the role.
+     * @param token the JWT token string
+     * @return the role claim encoded in the token
+     */
+
 }
