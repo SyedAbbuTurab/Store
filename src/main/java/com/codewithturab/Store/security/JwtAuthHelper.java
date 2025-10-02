@@ -28,7 +28,7 @@ public class JwtAuthHelper {
      * @param token the JWT token string
      * @return the username encoded in the token
      */
-    public String validateTokenAndExtractUsername (String token) {
+    public String validateAndExtractUsername (String token) {
         if(jwtUtil.isTokenValid(token)) {
             throw new RuntimeException("Invalid or Expired token");
         }
@@ -40,5 +40,6 @@ public class JwtAuthHelper {
      * @param token the JWT token string
      * @return the role claim encoded in the token
      */
+
 
 }
