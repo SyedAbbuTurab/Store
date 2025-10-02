@@ -33,11 +33,13 @@ public class BookController {
     @GetMapping
     public List<BookResponse> getBooks(@RequestHeader("Authorization") String authHeader) {
         logger.info("📚 Fetching all books");
-        String token = authHeader.replace("Bearer ", "");
+//        String token = authHeader.replace("Bearer ", "");
+        String token = jwtAuthHelper.extractToken(authHeader);
 
-        if(!jwtUtil.isTokenValid(token)) {
-            throw new RuntimeException("Invalid or expired token");
-        }
+//        if(!jwtUtil.isTokenValid(token)) {
+//            throw new RuntimeException("Invalid or expired token");
+//        }
+
         List<BookResponse> books = service.getAllBooks().stream()
                 .map(book -> new BookResponse(book.getId(), book.getTitle(), book.getAuthor()))
                 .toList();
@@ -73,12 +75,8 @@ public class BookController {
 
     @GetMapping("/admin")
     public String adminOnly(@RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.replace("Bearer ", "");
-        if(!jwtUtil.isTokenValid(token)) {
-            throw  new RuntimeException("Invalid or Expired toke!");
-        }
-
-        String role = jwtUtil.extractRole(token);
+        String token = jwtAuthHelper.extractToken(authHeader);
+        String role = jwtAuthHelper.validateAndExtractRole(token);
 
         if(!"ADMIN".equals(role)) {
             throw new RuntimeException("Access denied. Admins only.");
