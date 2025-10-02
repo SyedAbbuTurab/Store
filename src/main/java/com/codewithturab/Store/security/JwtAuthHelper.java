@@ -29,7 +29,7 @@ public class JwtAuthHelper {
      * @return the username encoded in the token
      */
     public String validateAndExtractUsername (String token) {
-        if(jwtUtil.isTokenValid(token)) {
+        if(!jwtUtil.isTokenValid(token)) {
             throw new RuntimeException("Invalid or Expired token");
         }
         return jwtUtil.extractUsername(token);
@@ -41,7 +41,7 @@ public class JwtAuthHelper {
      * @return the role claim encoded in the token
      */
     public String validateAndExtractRole(String token) {
-        if(jwtUtil.isTokenValid(token)) {
+        if(!jwtUtil.isTokenValid(token)) {
             throw new RuntimeException("Invalid or Expired token.");
         }
         return jwtUtil.extractRole(token);
