@@ -1,6 +1,7 @@
 package com.codewithturab.Store.controller;
 
 import com.codewithturab.Store.model.Book;
+import com.codewithturab.Store.security.JwtAuthHelper;
 import com.codewithturab.Store.service.BookService;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -21,10 +22,12 @@ public class BookController {
 
     private final BookService service;
     private final JwtUtil jwtUtil;
+    private final JwtAuthHelper jwtAuthHelper;
 
-    BookController(BookService service, JwtUtil jwtUtil) {
+    BookController(BookService service, JwtUtil jwtUtil, JwtAuthHelper jwtAuthHelper) {
         this.service = service;
         this.jwtUtil = jwtUtil;
+        this.jwtAuthHelper = jwtAuthHelper;
     }
 
     @GetMapping
