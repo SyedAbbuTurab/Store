@@ -10,4 +10,19 @@ public class JwtAuthHelper {
     public JwtAuthHelper(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
+
+    /**
+     * Extracts the raw token string from the Authorization header.
+     * @param authHeader the value of the Authorization header
+     * @return the raw token string without the "Bearer " prefix
+     */
+
+    public String extractToken(String authHeader) {
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw  new RuntimeException("Missing or malformed Authorization header");
+        }
+        return authHeader.substring(7);
+    }
+
+
 }
