@@ -23,6 +23,10 @@ public class JwtAuthHelper {
         }
         return authHeader.substring(7);
     }
-
+    /**
+     * Validates the JWT token and returns the username.
+     * @param token the JWT token string
+     * @return the username encoded in the token
+     */
 
 }
