@@ -1,6 +1,7 @@
 package com.codewithturab.Store.controller;
 
 import com.codewithturab.Store.model.Book;
+import com.codewithturab.Store.security.JwtAuthHelper;
 import com.codewithturab.Store.service.BookService;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -21,20 +22,20 @@ public class BookController {
 
     private final BookService service;
     private final JwtUtil jwtUtil;
+    private final JwtAuthHelper jwtAuthHelper;
 
-    BookController(BookService service, JwtUtil jwtUtil) {
+    BookController(BookService service, JwtUtil jwtUtil, JwtAuthHelper jwtAuthHelper) {
         this.service = service;
         this.jwtUtil = jwtUtil;
+        this.jwtAuthHelper = jwtAuthHelper;
     }
 
     @GetMapping
     public List<BookResponse> getBooks(@RequestHeader("Authorization") String authHeader) {
         logger.info("📚 Fetching all books");
-        String token = authHeader.replace("Bearer ", "");
+        String token = jwtAuthHelper.extractToken(authHeader);
+        jwtAuthHelper.validateAndExtractUsername(token);  // just validates
 
-        if(!jwtUtil.isTokenValid(token)) {
-            throw new RuntimeException("Invalid or expired token");
-        }
         List<BookResponse> books = service.getAllBooks().stream()
                 .map(book -> new BookResponse(book.getId(), book.getTitle(), book.getAuthor()))
                 .toList();
@@ -70,12 +71,8 @@ public class BookController {
 
     @GetMapping("/admin")
     public String adminOnly(@RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.replace("Bearer ", "");
-        if(!jwtUtil.isTokenValid(token)) {
-            throw  new RuntimeException("Invalid or Expired toke!");
-        }
-
-        String role = jwtUtil.extractRole(token);
+        String token = jwtAuthHelper.extractToken(authHeader);
+        String role = jwtAuthHelper.validateAndExtractRole(token);
 
         if(!"ADMIN".equals(role)) {
             throw new RuntimeException("Access denied. Admins only.");
