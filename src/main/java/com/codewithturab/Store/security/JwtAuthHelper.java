@@ -28,5 +28,11 @@ public class JwtAuthHelper {
      * @param token the JWT token string
      * @return the username encoded in the token
      */
+    public String validateTokenAndExtractUsername (String token) {
+        if(jwtUtil.isTokenValid(token)) {
+            throw new RuntimeException("Invalid or Expired token");
+        }
+        return jwtUtil.extractUsername(token);
+    }
 
 }
