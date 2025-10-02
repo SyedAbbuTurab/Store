@@ -46,6 +46,4 @@ public class JwtAuthHelper {
         }
         return jwtUtil.extractRole(token);
     }
-
-
 }
