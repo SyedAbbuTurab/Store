@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+    implementation project(":common-lib")
     implementation 'org.springframework.boot:spring-boot-starter-web'        // Web APIs (REST)
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' // MongoDB integration
     implementation 'org.springframework.boot:spring-boot-starter-validation' // For input validation
