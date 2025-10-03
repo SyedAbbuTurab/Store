@@ -3,3 +3,5 @@ rootProject.name = "Store"
 // Declare subprojects (modules)
 include("store-api")
 include("inventory-service")
+
+include("common-lib")

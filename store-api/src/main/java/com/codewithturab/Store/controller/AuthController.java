@@ -51,7 +51,7 @@ public class AuthController {
             throw  new RuntimeException("Invalid credentials");
         }
 
-        logger.info("Login attempt for user: {}", loginRequest.getUsername() + "Successful & token generated");
+        logger.info("Login attempt for user: {}", loginRequest.getUsername());
 
         String token = jwtUtil.generateToken(user.getUsername(), user.getRole());
         return  Map.of( "token", token);
