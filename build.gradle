@@ -1,0 +1,12 @@
+plugins {
+    // no spring plugin here, it's just a parent
+    id 'base'
+}
+
+allprojects {
+    group = 'com.codewithturab'
+    version = '0.0.1-SNAPSHOT'
+    repositories {
+        mavenCentral()
+    }
+}
