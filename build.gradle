@@ -1,39 +1,12 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.5'
-	id 'io.spring.dependency-management' version '1.1.7'
+    // no spring plugin here, it's just a parent
+    id 'base'
 }
 
-group = 'com.codewithturab'
-version = '0.0.1-SNAPSHOT'
-description = 'Demo project for Spring Boot'
-
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
-}
-
-repositories {
-	mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'        // Web APIs (REST)
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' // MongoDB integration
-    implementation 'org.springframework.boot:spring-boot-starter-validation' // For input validation
-
-//    implementation 'org.springframework.boot:spring-boot-starter-security'   // Spring Security
-    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'                        // JWT API
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'                          // JWT implementation
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'                       // JSON parsing
-
-
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'   // JUnit + Spring test libs
-}
-
-
-tasks.named('test') {
-	useJUnitPlatform()
+allprojects {
+    group = 'com.codewithturab'
+    version = '0.0.1-SNAPSHOT'
+    repositories {
+        mavenCentral()
+    }
 }
