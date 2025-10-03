@@ -1,0 +1,3 @@
+rootProject.name = 'inventory-servic'
+include 'Store:inventory-servic'
+project(':Store:inventory-servic').projectDir = file('../Store/inventory-servic')
