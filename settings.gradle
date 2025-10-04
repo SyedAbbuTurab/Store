@@ -5,7 +5,11 @@ include("store-api")
 include("inventory-service")
 
 include("common-lib")
-include 'Store:order-service'
-project(':Store:order-service').projectDir = file('../Store/order-service')
-include 'Store:payment-service'
-project(':Store:payment-service').projectDir = file('../Store/payment-service')
+include("order-service")
+include("payment-service")
+
+// Other way to do it
+//include 'Store:order-service'
+//project(':Store:order-service').projectDir = file('../Store/order-service')
+//include 'Store:payment-service'
+//project(':Store:payment-service').projectDir = file('../Store/payment-service')
