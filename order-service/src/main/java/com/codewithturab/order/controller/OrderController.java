@@ -3,6 +3,10 @@ package com.codewithturab.order.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import com.codewithturab.order.model.Order;
+import com.codewithturab.order.repository.OrderRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -10,9 +14,21 @@ public class OrderController {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
-    @GetMapping("/health")
-    public String health() {
-        logger.info("✅ Order service is up");
-        return "Order service is running!";
+    private final OrderRepository repo;
+
+    public OrderController(OrderRepository repo) {
+        this.repo = repo;
     }
+
+    @GetMapping
+    public List<Order> getAll() {
+        return repo.findAll();
+    }
+
+    @PostMapping
+    public Order create(@RequestBody Order order) {
+        return repo.save(order);
+    }
+
+
 }
