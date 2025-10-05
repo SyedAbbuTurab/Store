@@ -30,5 +30,9 @@ public class OrderController {
         return repo.save(order);
     }
 
+    @DeleteMapping("{/id}")
+    public void delete(@PathVariable String id) {
+        repo.deleteById(id);
+    }
 
 }
