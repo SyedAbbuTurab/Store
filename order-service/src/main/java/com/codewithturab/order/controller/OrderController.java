@@ -27,10 +27,11 @@ public class OrderController {
 
     @PostMapping
     public Order create(@RequestBody Order order) {
+        logger.info(order.getProductName());
         return repo.save(order);
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
         repo.deleteById(id);
     }
