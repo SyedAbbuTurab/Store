@@ -41,8 +41,8 @@ public class OrderController {
     public String test(@RequestHeader("Authorization") String authHeader) {
         String token = authHeader.replace("Bearer ", "");
         boolean valid = authClient.validateToken(token);
-        return valid ? "✅ Token is valid. Order service is working!"
-                : "❌ Invalid token!";
+        return valid ? "Token is valid. Order service is working!"
+                : "Invalid token!";
     }
 
 }
