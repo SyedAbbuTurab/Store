@@ -37,5 +37,12 @@ public class OrderController {
     public void delete(@PathVariable String id) {
         repo.deleteById(id);
     }
+    @GetMapping("/test")
+    public String test(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        boolean valid = authClient.validateToken(token);
+        return valid ? "✅ Token is valid. Order service is working!"
+                : "❌ Invalid token!";
+    }
 
 }
