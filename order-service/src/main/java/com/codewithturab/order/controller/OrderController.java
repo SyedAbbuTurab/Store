@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import com.codewithturab.order.model.Order;
 import com.codewithturab.order.repository.OrderRepository;
+import com.codewithturab.order.client.AuthClient;
 
 import java.util.List;
 
@@ -13,11 +14,12 @@ import java.util.List;
 public class OrderController {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
-
     private final OrderRepository repo;
+    private final AuthClient authClient;
 
-    public OrderController(OrderRepository repo) {
+    public OrderController(OrderRepository repo, AuthClient authClient) {
         this.repo = repo;
+        this.authClient = authClient;
     }
 
     @GetMapping
