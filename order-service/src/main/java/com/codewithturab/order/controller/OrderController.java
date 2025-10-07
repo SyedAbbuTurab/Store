@@ -40,6 +40,7 @@ public class OrderController {
     @GetMapping("/test")
     public String test(@RequestHeader("Authorization") String authHeader) {
         String token = authHeader.replace("Bearer ", "");
+        logger.info("Here");
         boolean valid = authClient.validateToken(token);
         return valid ? "Token is valid. Order service is working!"
                 : "Invalid token!";

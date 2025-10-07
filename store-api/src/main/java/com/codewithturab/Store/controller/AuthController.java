@@ -58,5 +58,19 @@ public class AuthController {
         return  Map.of( "token", token);
     }
 
+    @PostMapping("/validate")
+    public Map<String, Object> validateToken(@RequestBody Map<String, String> payload) {
+        String token = payload.get("token");
+        logger.info("🔐 Validating token: {}", token);
+
+        boolean isValid = JwtUtil.isTokenValid(token);
+        String username = isValid ? JwtUtil.extractUsername(token) : null;
+
+        return Map.of(
+                "valid", isValid,
+                "username", username
+        );
+    }
+
 
 }
