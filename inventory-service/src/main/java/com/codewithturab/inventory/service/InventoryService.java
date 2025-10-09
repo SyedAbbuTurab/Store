@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class InventoryService {
 
@@ -23,4 +24,11 @@ public class InventoryService {
         return repo.save(inventory);
     }
 
+    public Optional<inventory> findByProduct(String name) {
+        return repo.findByProductName(name);
+    }
+
+    public void delete(String id) {
+        repo.deleteById(id);
+    }
 }
