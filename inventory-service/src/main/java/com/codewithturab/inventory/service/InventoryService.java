@@ -15,5 +15,8 @@ public class InventoryService {
         this.repo = repo;
     }
 
+    public List<inventory>getAll() {
+        return repo.findAll();
+    }
 
 }
