@@ -19,4 +19,8 @@ public class InventoryService {
         return repo.findAll();
     }
 
+    public inventory add(inventory inventory) {
+        return repo.save(inventory);
+    }
+
 }
