@@ -16,6 +16,7 @@ public class InventoryService {
         this.repo = repo;
     }
 
+    // This method returns the list of inventory.
     public List<inventory>getAll() {
         return repo.findAll();
     }
