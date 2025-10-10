@@ -20,6 +20,7 @@ public class InventoryService {
         return repo.findAll();
     }
 
+    // Add's the new data to MongoD and returns the type inventory.
     public inventory add(inventory inventory) {
         return repo.save(inventory);
     }
