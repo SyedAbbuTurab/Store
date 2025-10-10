@@ -24,6 +24,7 @@ public class InventoryService {
         return repo.save(inventory);
     }
 
+    // Find product by name and Datatype it returns is inventory
     public Optional<inventory> findByProduct(String name) {
         return repo.findByProductName(name);
     }
