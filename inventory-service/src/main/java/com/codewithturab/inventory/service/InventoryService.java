@@ -29,6 +29,7 @@ public class InventoryService {
         return repo.findByProductName(name);
     }
 
+    // Removes or Completely deletes the data from MongoD.
     public void delete(String id) {
         repo.deleteById(id);
     }
