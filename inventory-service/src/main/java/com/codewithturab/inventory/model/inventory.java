@@ -22,7 +22,7 @@ public class inventory {
         this.price = price;
     }
 
-    // 🧾 Getters & Setters
+    // Getters & Setters
     public String getId() {
         return id;
     }
