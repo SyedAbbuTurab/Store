@@ -42,7 +42,7 @@ public class InventoryController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
-        logger.warn("🗑️ Request received to delete item with ID: {}", id);
+        logger.warn("Request received to delete item with ID: {}", id);
         service.delete(id);
     }
 
