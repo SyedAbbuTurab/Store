@@ -42,7 +42,7 @@ public class InventoryController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
-        logger.warn("🗑️ Request received to delete item with ID: {}", id);
+        logger.warn("Request received to delete item with ID: {}", id);
         service.delete(id);
     }
 
@@ -51,7 +51,7 @@ public class InventoryController {
         logger.info("🔍 Searching inventory for product: {}", name);
         return service.findByProduct(name)
                 .orElseThrow(() -> {
-                    logger.error("❌ Product '{}' not found in inventory", name);
+                    logger.error("Product '{}' not found in inventory", name);
                     return new RuntimeException("Product not found");
                 });
     }

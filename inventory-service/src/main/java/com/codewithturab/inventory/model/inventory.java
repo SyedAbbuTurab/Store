@@ -12,17 +12,17 @@ public class inventory {
     private int quantity;
     private double price;
 
-    // 🧩 Default constructor (required by Spring Data)
+    // Default constructor (required by Spring Data)
     public inventory() {}
 
-    // 🧱 All-args constructor for convenience
+    // All-args constructor for convenience
     public inventory(String productName, int quantity, double price) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
     }
 
-    // 🧾 Getters & Setters
+    // Getters & Setters
     public String getId() {
         return id;
     }
