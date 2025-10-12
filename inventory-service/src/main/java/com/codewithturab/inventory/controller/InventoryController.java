@@ -3,6 +3,7 @@ package com.codewithturab.inventory.controller;
 import com.codewithturab.inventory.model.inventory;
 import com.codewithturab.inventory.service.InventoryService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
