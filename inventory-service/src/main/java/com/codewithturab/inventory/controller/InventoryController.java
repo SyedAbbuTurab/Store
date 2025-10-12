@@ -51,7 +51,7 @@ public class InventoryController {
         logger.info("🔍 Searching inventory for product: {}", name);
         return service.findByProduct(name)
                 .orElseThrow(() -> {
-                    logger.error("❌ Product '{}' not found in inventory", name);
+                    logger.error("Product '{}' not found in inventory", name);
                     return new RuntimeException("Product not found");
                 });
     }
