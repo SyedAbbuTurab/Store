@@ -1,17 +1,38 @@
 plugins {
-    // no spring plugin here, it's just a parent
-    id 'base'
+    id 'base' // parent aggregator only, no boot plugin here
 }
 
 allprojects {
     group = 'com.codewithturab'
     version = '0.0.1-SNAPSHOT'
+
     repositories {
         mavenCentral()
     }
-}
-subprojects {
+
+    // ✅ Enforce Java 17 across all modules
     apply plugin: 'java'
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    // Common test setup
+    test {
+        useJUnitPlatform()
+    }
+}
+
+subprojects {
+    // Apply to every child project automatically
+    apply plugin: 'java'
+
     sourceCompatibility = '17'
     targetCompatibility = '17'
+
+    // ✅ Optional default dependencies for all subprojects
+    dependencies {
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
 }
