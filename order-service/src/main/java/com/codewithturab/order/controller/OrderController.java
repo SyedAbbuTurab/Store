@@ -31,7 +31,7 @@ public class OrderController {
     // 🔍 Get order by ID
     @GetMapping("/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable String id) {
-        logger.info("🔍 [GET] Fetching order by ID: {}", id);
+        logger.info("[GET] Fetching order by ID: {}", id);
         return service.getById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> {
@@ -47,12 +47,12 @@ public class OrderController {
                 order.getProductName(), order.getQuantity());
 
         if (order.getProductName() == null || order.getProductName().isBlank()) {
-            logger.error("❌ Invalid order: Product name is empty");
+            logger.error("Invalid order: Product name is empty");
             return ResponseEntity.badRequest().build();
         }
 
         Order saved = service.create(order);
-        logger.info("✅ Order created successfully with ID: {}", saved.getId());
+        logger.info("Order created successfully with ID: {}", saved.getId());
         return ResponseEntity.ok(saved);
     }
 
